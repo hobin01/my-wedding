@@ -1,0 +1,48 @@
+# ─── OS 시스템 파일 ───────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─── 에디터 / IDE 설정 ────────────────────────────────────
+.vscode/
+.idea/
+*.sublime-*
+*.swp
+*.swo
+*~
+
+# ─── 로그 / 임시 파일 ─────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Node / 빌드 아티팩트 (Vite 전환 대비) ──────────────
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+.parcel-cache/
+
+# ─── 환경 변수 / 비밀 키 ──────────────────────────────────
+# config.js 에 실키를 직접 적기보다 .env 를 통해 주입하는 구조로 바꿀 때 대비
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.production.local
+
+# ─── Claude Code 세션 (개인 설정) ─────────────────────────
+.claude/
+
+# ─── 빈 디렉토리 유지용 ────────────────────────────────────
+# 이 템플릿의 assets/ 와 assets/gallery/ 는 더미 이미지로 이미 채워져 있어
+# .gitkeep 없이도 커밋 대상이 됩니다. 혹시 남아 있더라도 커밋하지 않도록 ignore.
+.gitkeep

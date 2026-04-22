@@ -1,0 +1,136 @@
+<!-- index.html — GitHub Pages entry point -->
+<!-- 대부분의 내용은 config.js 한 곳만 수정하면 됩니다. -->
+<!-- 단, 카카오톡/페이스북 등 소셜 크롤러는 JavaScript 를 실행하지 않으므로 -->
+<!-- 공유 미리보기용 og 메타 태그는 아래 정적 값도 함께 수정해야 합니다. -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#FBF6EE">
+
+<!-- 정적 메타 (소셜 크롤러용) — config.js 의 meta 섹션과 값을 맞춰주세요 -->
+<title>AAA · BBB의 결혼식에 초대합니다</title>
+<meta name="description" content="YYYY년 MM월 DD일 X요일 오후 X시 XX분 · 그랜드 인터컨티넨탈 서울">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AAA · BBB의 결혼식에 초대합니다">
+<meta property="og:description" content="YYYY년 MM월 DD일 X요일 오후 X시 XX분 · 그랜드 인터컨티넨탈 서울">
+<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:url" content="https://YOURNAME.github.io/wedding-invitation/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF6EE; }
+  body { font-family: "Noto Sans KR", -apple-system, sans-serif; min-height: 100dvh; }
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  .app-shell {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    background: #FBF6EE;
+    box-shadow: 0 0 40px rgba(0,0,0,0.04);
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- 1) 사용자 설정을 가장 먼저 로드 (다른 스크립트들이 window.CONFIG 를 참조) -->
+<script src="./config.js"></script>
+
+<!-- 2) 카카오 JS SDK — kakaoAppKey 가 설정되어 있을 때만 초기화됨 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+        integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+        crossorigin="anonymous"></script>
+
+<!-- 3) CONFIG 기반 런타임 메타 동기화 (탭 제목/favicon) -->
+<!--    og 태그는 소셜 크롤러가 JS 를 실행하지 않아 정적 값을 우선하지만, -->
+<!--    브라우저에 열린 상태에서 공유/복사되는 경우를 대비해 함께 갱신합니다. -->
+<script>
+(function () {
+  var c = window.CONFIG;
+  if (!c || !c.meta) return;
+  var m = c.meta;
+  if (m.title) document.title = m.title;
+  var setMeta = function (selector, attr, value) {
+    var el = document.querySelector(selector);
+    if (el && value != null) el.setAttribute(attr, value);
+  };
+  setMeta('meta[name="description"]', 'content', m.description);
+  setMeta('meta[property="og:title"]', 'content', m.title);
+  setMeta('meta[property="og:description"]', 'content', m.description);
+  if (m.siteUrl && m.siteUrl.indexOf('YOURNAME') === -1) {
+    setMeta('meta[property="og:url"]', 'content', m.siteUrl);
+    if (m.ogImage) {
+      try {
+        var abs = new URL('assets/' + m.ogImage, m.siteUrl).href;
+        setMeta('meta[property="og:image"]', 'content', abs);
+      } catch (e) {}
+    }
+  }
+  if (m.favicon) {
+    var link = document.querySelector('link[rel="icon"]');
+    if (link) link.setAttribute('href', './assets/' + m.favicon);
+  }
+
+  // 카카오 SDK 가 유효한 키로 동작할 수 있는지 판별
+  var isRealKey = !!m.kakaoAppKey
+    && m.kakaoAppKey.indexOf('DUMMY') === -1
+    && m.kakaoAppKey.indexOf('YOUR_') === -1;
+
+  // Kakao Share SDK 초기화 — 실키일 때만
+  if (window.Kakao && isRealKey && !window.Kakao.isInitialized()) {
+    try { window.Kakao.init(m.kakaoAppKey); } catch (e) { console.warn('[Kakao] init failed:', e); }
+  }
+
+  // Kakao Maps JS SDK 동적 로드 — 실키일 때만 (잘못된 키로 대시보드 에러 노이즈 방지)
+  // autoload=false: MapSection 에서 kakao.maps.load(cb) 로 명시적 초기화.
+  if (isRealKey && !window.kakao) {
+    var s = document.createElement('script');
+    s.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=' + encodeURIComponent(m.kakaoAppKey) + '&autoload=false';
+    s.async = true;
+    s.onerror = function () { console.warn('[Kakao Maps] SDK load failed — falling back to static map.'); };
+    document.head.appendChild(s);
+  }
+})();
+</script>
+
+<!-- 4) React / Babel — CDN (빌드 불필요) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+<!-- 5) 컴포넌트 — data.jsx 는 CONFIG → INVITE_DATA 어댑터 -->
+<script type="text/babel" src="./components/data.jsx"></script>
+<script type="text/babel" src="./components/flowers.jsx"></script>
+<script type="text/babel" src="./components/theme.jsx"></script>
+<script type="text/babel" src="./components/sections-a.jsx"></script>
+<script type="text/babel" src="./components/sections-b.jsx"></script>
+
+<script type="text/babel">
+function Invitation() {
+  return (
+    <div className="app-shell">
+      <CoverSection />
+      <InvitationSection />
+      <ProfileSection />
+      <ParentsSection />
+      <DateTimeSection />
+      <CalendarSection />
+      <GallerySection />
+      <MapSection />
+      <NoticeSection />
+      <AccountsSection />
+      <ShareSection />
+      <FooterSection />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Invitation />);
+</script>
+</body>
+</html>
