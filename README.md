@@ -1,11 +1,8 @@
 # 모바일 청첩장 템플릿 — 화원(花園) 테마
 
-조선 백자 + 청화(靑華) 감성의 정적 웹 청첩장 템플릿입니다.
 **빌드 도구 없이 GitHub Pages 로 바로 배포** 할 수 있고, 서버도 필요 없습니다.
 
-> ✨ 이 템플릿은 [Anthropic Claude](https://claude.com) (Claude Opus 4.7) 와
-> Claude Design 의 도움을 받아 기획·구현되었습니다. 기획 대화부터 코드·디자인·
-> 문서까지 전 과정을 Claude 와 함께 만들어 나갔습니다.
+✨ 이 템플릿은 Claude Opus 4.7, Claude Design 의 도움을 받아 기획·구현되었습니다.
 
 ---
 
@@ -76,7 +73,7 @@ python3 -m http.server 8000
 
 ### 5️⃣ GitHub Pages 로 배포
 
-GitHub 에 push 하고 **Settings → Pages → Deploy from a branch → main / root → Save**. 1~2분 뒤 `https://내계정.github.io/레포이름/` 에서 실제 웹 주소로 접속 가능. 자세한 절차는 [배포 섹션](#github-pages-배포).
+GitHub 에 push 하고 **Settings → Pages → Deploy from a branch → main / root → Save**. 1~2분 뒤 `https://내계정.github.io` 에서 실제 웹 주소로 접속 가능. 자세한 절차는 [배포 섹션](#github-pages-배포).
 
 ---
 
@@ -109,11 +106,31 @@ wedding-mobile-invitation/
     └── sections-b.jsx      # Gallery/Map/Notice/Accounts/Share/Footer
 ```
 
-**실사용자가 건드리는 파일은 단 두 가지**:
+**실사용자가 건드리는 파일은 단 세 가지**:
+- `index.html` → 소셜 크롤러용 메타데이터 (카카오톡 링크 썸네일 기능)
 - `config.js` → 텍스트 정보 전부
 - `assets/` 폴더의 이미지 → 사진 전부
 
 나머지는 그대로 둬도 됩니다.
+
+---
+
+## `index.html` 수정 가이드
+
+아래 값 중 `title`, `content` 을 적합한 값으로 변경하세요. 
+
+config.js 에 설정하는 값과 일치하는 것을 권장합니다.
+
+```html
+<!-- 정적 메타 (소셜 크롤러용) — config.js 의 meta 섹션과 값을 맞춰주세요 -->
+<title>AAA · BBB의 결혼식에 초대합니다</title>
+<meta name="description" content="YYYY년 MM월 DD일 X요일 오후 X시 XX분 · 그랜드 인터컨티넨탈 서울">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AAA · BBB의 결혼식에 초대합니다">
+<meta property="og:description" content="YYYY년 MM월 DD일 X요일 오후 X시 XX분 · 그랜드 인터컨티넨탈 서울">
+<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:url" content="https://YOURNAME.github.io/">
+```
 
 ---
 
@@ -350,20 +367,25 @@ python3 -m http.server 8000
 
 ### 절차
 
-1. **GitHub 에 새 repo 생성** (Public 추천)
-   - 이름 예: `wedding-invitation`
-   - README/gitignore 옵션 체크 **해제** (이미 레포 안에 있으니)
+1. **GitHub 에 github.io repo 생성** (Public 추천)
+   - 이름 형식: `USERNAME.github.io`
+   - [github pages 만들기](https://docs.github.com/ko/pages/quickstart)
 
 2. **프로젝트를 repo 에 올리기**
+  - 사용자 이름 `YOURNAME` 가정
+  - `YOURNAME.github.io` repository 만들기 (public)
 
    ```bash
-   cd wedding-mobile-invitation
-   git init
+   git clone https://github.com/hb4258/wedding-mobile-invitation.git
+   mkdir -p YOURNAME.github.io
+   cp -r wedding-mobile-invitation YOURNAME.github.io
+   cd YOURNAME.github.io
+   rm -rf .git
+   # index.html, config.js 수정 등 필요한 작업 수행
+   git remote add origin https://github.com/YOURNAME/YOURNAME.github.io.git
    git add .
-   git commit -m "청첩장 초기 설정"
-   git branch -M main
-   git remote add origin https://github.com/YOURNAME/wedding-invitation.git
-   git push -u origin main
+   git commit -m "my-wedding-mobile-invitation"
+   git push -u origin
    ```
 
 3. **Pages 활성화**
@@ -372,7 +394,7 @@ python3 -m http.server 8000
    - Source: **Deploy from a branch**
    - Branch: **main** / **/ (root)** → **Save**
 
-4. **1~2분 후** `https://YOURNAME.github.io/wedding-invitation/` 접속
+4. **1~2분 후** `https://YOURNAME.github.io` 접속
 
 5. **`config.js` 의 `meta.siteUrl`** 을 이 실제 URL 로 수정 → 다시 `git commit && git push`
    (카카오 공유 썸네일이 제대로 된 URL 로 생성되게 하기 위함)
@@ -429,24 +451,6 @@ const THEME = {
 <ProfileSection />
 {/* 여기서 마음대로 순서 바꾸거나 삭제 */}
 ```
-
----
-
-## 정적 페이지의 한계
-
-이 템플릿은 서버 없이 돌아가기 때문에 아래 기능은 **포함되지 않습니다**.
-
-| 기능 | 이유 | 대안 |
-|---|---|---|
-| 방명록 | 메시지 저장·조회 서버 필요 | Firebase, Supabase 등 별도 연동 |
-| RSVP 참석 여부 폼 | 답변 저장소 필요 | 전화/문자 버튼으로 대체 (이미 포함) |
-| 카카오페이 송금 (금액 pre-fill) | 카카오페이 비즈 API 필요 | 계좌번호 복사 기능 (이미 포함) |
-| 실시간 식전영상 스트리밍 | 미디어 서버·CDN 필요 | 녹화본 유튜브 embed |
-| 하객 사진 업로드 | 스토리지 필요 | 사전에 갤러리에 업로드 |
-| 방문자 수·좋아요 집계 | DB 필요 | 생략 |
-| 관리자 페이지 | 서버 필요 | `config.js` 직접 편집 |
-
-꼭 필요해지면 Firebase / Supabase / Vercel Functions 같은 BaaS 를 별도로 붙이는 방식을 권장합니다.
 
 ---
 
