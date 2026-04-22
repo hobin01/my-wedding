@@ -11,7 +11,6 @@ window.CONFIG = {
     title: '이도현 · 한지우의 결혼식에 초대합니다',
     description: '2026년 11월 7일 토요일 오후 1시 30분 · 그랜드 인터컨티넨탈 서울',
     // 배포될 절대 URL (끝에 / 포함). 카카오톡 공유 이미지 생성 시 base 로 사용.
-    // siteUrl: 'https://YOURNAME.github.io/wedding-invitation/',
     siteUrl: 'https://hb4258.github.io/',
     // assets/ 기준 상대 경로. og.jpg 권장 사양: 1200×630, JPG, ≤300KB
     ogImage: 'og.jpg',
@@ -23,7 +22,6 @@ window.CONFIG = {
     heroImage: 'hero.jpg',
     // 카카오 JavaScript 키. 빈 문자열이거나 "DUMMY"/"YOUR_" 접두어가 있으면 비활성.
     // 하나의 JS 키로 "카카오톡 공유" + "카카오맵 JS SDK" 둘 다 사용 가능합니다.
-    // kakaoAppKey: 'DUMMY_KAKAO_JS_KEY',
     kakaoAppKey: '0ea5558172608f8c2db792e5dfe27dc3',
   },
 
