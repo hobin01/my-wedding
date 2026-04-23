@@ -222,12 +222,12 @@ function ProfileSection() {
       <SectionTitle en="Bride & Groom" ko="신 랑 · 신 부" />
 
       <div style={{ display: 'flex', gap: 16, marginTop: 32, alignItems: 'flex-start' }}>
-        <Person role="GROOM" name={d.groom.name} nameEn={d.groom.nameEn.full}
+        <Person role="GROOM" name={d.groom.name} nameEn={d.groom.nameEn.first}
           tone={GROOM_TONE} phone={d.groom.phone} photo={d.groom.photo} delay={100} />
         <div style={{ alignSelf: 'center', marginTop: 60 }}>
           <FlowerBlueLine size={28} stroke={THEME.accent} />
         </div>
-        <Person role="BRIDE" name={d.bride.name} nameEn={d.bride.nameEn.full}
+        <Person role="BRIDE" name={d.bride.name} nameEn={d.bride.nameEn.first}
           tone={BRIDE_TONE} phone={d.bride.phone} photo={d.bride.photo} delay={200} />
       </div>
     </section>
