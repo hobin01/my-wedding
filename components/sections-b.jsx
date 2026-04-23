@@ -2,6 +2,7 @@
 // 청첩장 섹션 — Part B (Gallery / Map / Accounts / Share / Footer)
 // 모든 표시 값은 window.INVITE_DATA (config.js 에서 파생) 를 참조합니다.
 // ──────────────────────────────────────────────────────────────────────
+const fs = window.fs || ((size) => size);
 
 // 07. Gallery — 라이트박스 (assets/gallery/ 자동 탐색 결과 사용)
 // 기본 7장(Hero 1 + Strip 4 + Grid 2) 까지 표시하고, 초과분은 "사진 더 보기" 토글로 확장.
@@ -87,7 +88,7 @@ function GallerySection() {
               padding: '10px 22px', background: 'transparent',
               border: `1px solid ${THEME.line}`, borderRadius: 0,
               fontFamily: '"Noto Sans KR", sans-serif',
-              fontSize: 11, color: THEME.textSoft, letterSpacing: 2, cursor: 'pointer',
+              fontSize: fs(11), color: THEME.textSoft, letterSpacing: 2, cursor: 'pointer',
               display: 'inline-flex', alignItems: 'center', gap: 8,
             }}>
               <span>{expanded ? '접기' : `사진 더 보기 +${hiddenCount}`}</span>
@@ -130,7 +131,7 @@ function Lightbox({ photos, index, onClose, onChange }) {
       </div>
       <div style={{
         marginTop: 20, fontFamily: '"Cormorant Garamond", serif',
-        fontSize: 13, letterSpacing: 3, color: 'rgba(255,255,255,0.8)', fontStyle: 'italic',
+        fontSize: fs(13), letterSpacing: 3, color: 'rgba(255,255,255,0.8)', fontStyle: 'italic',
       }}>{String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}</div>
       <div style={{ position: 'absolute', top: 16, right: 20, cursor: 'pointer' }} onClick={onClose}>
         <svg width="22" height="22" viewBox="0 0 22 22" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" fill="none" strokeLinecap="round"><path d="M3 3l16 16M19 3L3 19"/></svg>
@@ -240,7 +241,7 @@ function MapSection() {
   const btnStyle = {
     flex: 1, padding: '10px 8px', background: THEME.card,
     border: `1px solid ${THEME.line}`, borderRadius: 2,
-    fontFamily: '"Noto Sans KR", sans-serif', fontSize: 11,
+    fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11),
     color: THEME.textSoft, letterSpacing: 0.5, cursor: 'pointer',
   };
 
@@ -271,7 +272,7 @@ function MapSection() {
               {mode === 'fallback' && (
                 <div style={{
                   position: 'absolute', bottom: 8, right: 10,
-                  fontFamily: '"JetBrains Mono", monospace', fontSize: 9,
+                  fontFamily: '"JetBrains Mono", monospace', fontSize: fs(9),
                   color: THEME.textMuted, letterSpacing: 0.5,
                 }}>map: static</div>
               )}
@@ -279,8 +280,8 @@ function MapSection() {
           )}
         </div>
 
-        <div style={{ marginTop: 16, fontFamily: '"Noto Serif KR", serif', fontSize: 15, color: THEME.text, letterSpacing: 1, textAlign: 'center' }}>{name}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12, color: THEME.textSoft, textAlign: 'center', marginTop: 4, fontWeight: 300 }}>{address}</div>
+        <div style={{ marginTop: 16, fontFamily: '"Noto Serif KR", serif', fontSize: fs(15), color: THEME.text, letterSpacing: 1, textAlign: 'center' }}>{name}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, textAlign: 'center', marginTop: 4, fontWeight: 300 }}>{address}</div>
 
         <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
           <button onClick={openNaver} style={btnStyle}>네이버 지도</button>
@@ -302,11 +303,11 @@ function MapSection() {
                 border: `1px solid ${THEME.accent}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: '"Cormorant Garamond", serif',
-                fontSize: 13, color: THEME.accent, fontStyle: 'italic', flexShrink: 0,
+                fontSize: fs(13), color: THEME.accent, fontStyle: 'italic', flexShrink: 0,
               }}>{item.icon}</div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 13, color: THEME.text, fontWeight: 500, marginBottom: 3 }}>{item.label}</div>
-                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12, color: THEME.textSoft, lineHeight: 1.6, fontWeight: 300 }}>{item.detail}</div>
+                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(13), color: THEME.text, fontWeight: 500, marginBottom: 3 }}>{item.label}</div>
+                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, lineHeight: 1.6, fontWeight: 300 }}>{item.detail}</div>
               </div>
             </div>
           ))}
@@ -336,15 +337,15 @@ function NoticeSection() {
             <div style={{
               width: 32, height: 32, flexShrink: 0,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 18, lineHeight: 1,
+              fontSize: fs(18), lineHeight: 1,
             }}>{item.icon}</div>
             <div style={{ flex: 1 }}>
               <div style={{
-                fontFamily: '"Noto Serif KR", serif', fontSize: 13,
+                fontFamily: '"Noto Serif KR", serif', fontSize: fs(13),
                 color: THEME.text, fontWeight: 500, letterSpacing: 1, marginBottom: 4,
               }}>{item.title}</div>
               <div style={{
-                fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12,
+                fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12),
                 color: THEME.textSoft, lineHeight: 1.7, fontWeight: 300,
                 whiteSpace: 'pre-line',
               }}>{item.detail}
@@ -383,7 +384,7 @@ function AccountsSection() {
         border: `1px solid ${THEME.line}`,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         fontFamily: '"Noto Serif KR", serif',
-        fontSize: 14, color: THEME.text, letterSpacing: 2, cursor: 'pointer',
+        fontSize: fs(14), color: THEME.text, letterSpacing: 2, cursor: 'pointer',
       }}>
       <span>{label}</span>
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke={THEME.accent} strokeWidth="1.5"
@@ -399,14 +400,14 @@ function AccountsSection() {
       display: 'flex', alignItems: 'center', gap: 12,
     }}>
       <div style={{ flex: 1 }}>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 11, color: THEME.textMuted, letterSpacing: 0.5, marginBottom: 2 }}>{a.bank} · {a.name}</div>
-        <div style={{ fontFamily: '"Cormorant Garamond", "SF Mono", monospace', fontSize: 14, color: THEME.text, letterSpacing: 1 }}>{a.number}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, letterSpacing: 0.5, marginBottom: 2 }}>{a.bank} · {a.name}</div>
+        <div style={{ fontFamily: '"Cormorant Garamond", "SF Mono", monospace', fontSize: fs(14), color: THEME.text, letterSpacing: 1 }}>{a.number}</div>
       </div>
       <button onClick={() => copy(a.number, `${side}-${a.name}`)}
         style={{
           padding: '6px 12px', background: 'transparent',
           border: `1px solid ${THEME.line}`, borderRadius: 0,
-          fontFamily: '"Noto Sans KR", sans-serif', fontSize: 10,
+          fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(10),
           color: THEME.textSoft, cursor: 'pointer', letterSpacing: 1,
         }}>{copied === `${side}-${a.name}` ? '복사됨' : '복사'}</button>
     </div>
@@ -420,7 +421,7 @@ function AccountsSection() {
         <FadeIn delay={100} style={{ marginTop: 20 }}>
           <div style={{
             textAlign: 'center', fontFamily: '"Noto Serif KR", serif',
-            fontSize: 12, color: THEME.textSoft, lineHeight: 2,
+            fontSize: fs(12), color: THEME.textSoft, lineHeight: 2,
             fontWeight: 300, letterSpacing: 0.5, marginBottom: 28,
             whiteSpace: 'pre-line',
           }}>{note}</div>
@@ -498,7 +499,7 @@ function ShareSection() {
             flex: 1, padding: '14px', background: '#FEE500',
             border: 'none', borderRadius: 0,
             fontFamily: '"Noto Sans KR", sans-serif',
-            fontSize: 12, color: '#3A2D00', letterSpacing: 1, cursor: 'pointer',
+            fontSize: fs(12), color: '#3A2D00', letterSpacing: 1, cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
           }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -510,7 +511,7 @@ function ShareSection() {
             padding: '14px 16px', background: THEME.card,
             border: `1px solid ${THEME.line}`, borderRadius: 0,
             fontFamily: '"Noto Sans KR", sans-serif',
-            fontSize: 12, color: THEME.textSoft, letterSpacing: 1, cursor: 'pointer',
+            fontSize: fs(12), color: THEME.textSoft, letterSpacing: 1, cursor: 'pointer',
             display: 'flex', alignItems: 'center', gap: 6,
           }}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M5.5 8.5L8.5 5.5M4 9.5l-1 1a2.1 2.1 0 01-3-3l2.5-2.5a2.1 2.1 0 013 0M10 4.5l1-1a2.1 2.1 0 013 3l-2.5 2.5a2.1 2.1 0 01-3 0"/></svg>
@@ -530,8 +531,8 @@ function FooterSection() {
         <FlowerScatter width={335} height={80} variant={THEME.flowerVariant} density={THEME.flowerDensity * 0.5} style={{ margin: '0 auto 24px' }} />
       </FadeIn>
       <FadeIn delay={100}>
-        <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 12, letterSpacing: 4, color: THEME.accent, fontStyle: 'italic', marginBottom: 10 }}>THANK YOU</div>
-        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: 13, color: THEME.textSoft, lineHeight: 2, fontWeight: 300 }}>
+        <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: fs(12), letterSpacing: 4, color: THEME.accent, fontStyle: 'italic', marginBottom: 10 }}>THANK YOU</div>
+        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(13), color: THEME.textSoft, lineHeight: 2, fontWeight: 300 }}>
           함께해 주시는 모든 분들께<br/>진심으로 감사드립니다
         </div>
       </FadeIn>

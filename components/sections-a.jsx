@@ -6,6 +6,7 @@
 
 const _pad2 = (n) => String(n).padStart(2, '0');
 const _assetPath = (filename) => `./assets/${filename}`;
+const fs = window.fs || ((size) => size);
 
 // 01. Cover — 표지
 function CoverSection() {
@@ -42,7 +43,7 @@ function CoverSection() {
         <FadeIn>
           <div style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 14, letterSpacing: 8, color: THEME.accent, fontStyle: 'italic',
+            fontSize: fs(14), letterSpacing: 8, color: THEME.accent, fontStyle: 'italic',
             marginBottom: 24, textTransform: 'uppercase',
           }}>The Wedding Invitation</div>
         </FadeIn>
@@ -50,12 +51,12 @@ function CoverSection() {
         <FadeIn delay={400}>
           <div style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 44, lineHeight: 1.15, color: THEME.text,
+            fontSize: fs(44), lineHeight: 1.15, color: THEME.text,
             fontWeight: 300, letterSpacing: 1,
           }}>
             <div style={{ fontStyle: 'italic' }}>{d.groom.nameEn.first}</div>
             <div style={{
-              fontSize: 16, margin: '10px 0', letterSpacing: 4,
+              fontSize: fs(16), margin: '10px 0', letterSpacing: 4,
               color: THEME.accent, fontStyle: 'italic',
             }}>&</div>
             <div style={{ fontStyle: 'italic' }}>{d.bride.nameEn.first}</div>
@@ -69,11 +70,11 @@ function CoverSection() {
           }} />
           <div style={{
             fontFamily: '"Noto Serif KR", serif',
-            fontSize: 14, letterSpacing: 3, color: THEME.textSoft,
+            fontSize: fs(14), letterSpacing: 3, color: THEME.textSoft,
           }}>{d.date.displaySlash}</div>
           <div style={{
             fontFamily: '"Noto Sans KR", sans-serif',
-            fontSize: 12, letterSpacing: 2, color: THEME.textMuted,
+            fontSize: fs(12), letterSpacing: 2, color: THEME.textMuted,
             fontWeight: 300, marginTop: 8,
           }}>{d.date.venueLineKo}</div>
         </FadeIn>
@@ -100,19 +101,19 @@ function InvitationSection() {
         <FadeIn delay={80} style={{ marginTop: 8, marginBottom: 32 }}>
           <div style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 28, lineHeight: 1.2, color: THEME.accent,
+            fontSize: fs(28), lineHeight: 1.2, color: THEME.accent,
             fontStyle: 'italic', opacity: 0.6, marginBottom: 14,
           }}>“</div>
           <div style={{
             fontFamily: '"Noto Serif KR", serif',
-            fontSize: 14, lineHeight: 2, letterSpacing: 1,
+            fontSize: fs(14), lineHeight: 2, letterSpacing: 1,
             color: THEME.text, whiteSpace: 'pre-line', fontWeight: 300,
             fontStyle: 'italic',
           }}>{quote.text}</div>
           {quote.author && (
             <div style={{
               fontFamily: '"Cormorant Garamond", "Noto Serif KR", serif',
-              fontSize: 11, letterSpacing: 2, color: THEME.textMuted,
+              fontSize: fs(11), letterSpacing: 2, color: THEME.textMuted,
               marginTop: 12, fontStyle: 'italic',
             }}>— {quote.author}</div>
           )}
@@ -126,7 +127,7 @@ function InvitationSection() {
       <FadeIn delay={100} style={{ marginTop: quote ? 0 : 24 }}>
         <div style={{
           fontFamily: '"Noto Serif KR", serif',
-          fontSize: 15, lineHeight: 2.2, letterSpacing: 0.5,
+          fontSize: fs(15), lineHeight: 2.2, letterSpacing: 0.5,
           color: THEME.textSoft, whiteSpace: 'pre-line', fontWeight: 300,
         }}>{d.invitation}</div>
       </FadeIn>
@@ -135,16 +136,16 @@ function InvitationSection() {
         <div style={{ width: 30, height: 1, background: THEME.line }} />
         <div style={{
           fontFamily: '"Noto Serif KR", serif',
-          fontSize: 13, lineHeight: 2, color: THEME.text, letterSpacing: 1,
+          fontSize: fs(13), lineHeight: 2, color: THEME.text, letterSpacing: 1,
         }}>
           <div>
-            {gf} <span style={{ color: THEME.textMuted, fontSize: 11 }}>· </span>{gm}
-            <span style={{ color: THEME.textMuted, fontSize: 11, marginLeft: 8 }}>의 {d.groom.roleKo}</span>
+            {gf} <span style={{ color: THEME.textMuted, fontSize: fs(11) }}>· </span>{gm}
+            <span style={{ color: THEME.textMuted, fontSize: fs(11), marginLeft: 8 }}>의 {d.groom.roleKo}</span>
             <span style={{ color: THEME.accent, fontWeight: 500, marginLeft: 4 }}>{d.groom.name}</span>
           </div>
           <div>
-            {bf} <span style={{ color: THEME.textMuted, fontSize: 11 }}>· </span>{bm}
-            <span style={{ color: THEME.textMuted, fontSize: 11, marginLeft: 8 }}>의 {d.bride.roleKo}</span>
+            {bf} <span style={{ color: THEME.textMuted, fontSize: fs(11) }}>· </span>{bm}
+            <span style={{ color: THEME.textMuted, fontSize: fs(11), marginLeft: 8 }}>의 {d.bride.roleKo}</span>
             <span style={{ color: THEME.accent, fontWeight: 500, marginLeft: 4 }}>{d.bride.name}</span>
           </div>
         </div>
@@ -167,24 +168,24 @@ function ProfileSection() {
         style={{ margin: '0 auto 20px', borderRadius: 2 }} />
       <div style={{
         fontFamily: '"Cormorant Garamond", serif',
-        fontSize: 11, letterSpacing: 3, color: THEME.accent, fontStyle: 'italic',
+        fontSize: fs(11), letterSpacing: 3, color: THEME.accent, fontStyle: 'italic',
         marginBottom: 6,
       }}>{role}</div>
       <div style={{
         fontFamily: '"Noto Serif KR", serif',
-        fontSize: 20, color: THEME.text, letterSpacing: 4,
+        fontSize: fs(20), color: THEME.text, letterSpacing: 4,
         marginBottom: 6, fontWeight: 400,
       }}>{name}</div>
       <div style={{
         fontFamily: '"Cormorant Garamond", serif',
-        fontSize: 11, letterSpacing: 2, color: THEME.textMuted, fontStyle: 'italic',
+        fontSize: fs(11), letterSpacing: 2, color: THEME.textMuted, fontStyle: 'italic',
       }}>{nameEn}</div>
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 14 }}>
         <a href={`tel:${phone.replace(/-/g, '')}`} style={{
           padding: '6px 10px', background: 'transparent',
           border: `1px solid ${THEME.line}`, borderRadius: 20,
-          fontFamily: 'inherit', fontSize: 10, color: THEME.textSoft,
+          fontFamily: 'inherit', fontSize: fs(10), color: THEME.textSoft,
           textDecoration: 'none', letterSpacing: 0.5,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
@@ -194,7 +195,7 @@ function ProfileSection() {
         <a href={`sms:${phone.replace(/-/g, '')}`} style={{
           padding: '6px 10px', background: 'transparent',
           border: `1px solid ${THEME.line}`, borderRadius: 20,
-          fontFamily: 'inherit', fontSize: 10, color: THEME.textSoft,
+          fontFamily: 'inherit', fontSize: fs(10), color: THEME.textSoft,
           textDecoration: 'none', letterSpacing: 0.5,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
@@ -252,19 +253,19 @@ function ParentsSection() {
     <FadeIn delay={delay} style={{ textAlign: 'center', flex: 1 }}>
       <div style={{
         fontFamily: '"Cormorant Garamond", serif',
-        fontSize: 11, letterSpacing: 3, color: THEME.accent, fontStyle: 'italic',
+        fontSize: fs(11), letterSpacing: 3, color: THEME.accent, fontStyle: 'italic',
         marginBottom: 14, textTransform: 'uppercase',
       }}>{title}</div>
       <div style={{
         fontFamily: '"Noto Serif KR", serif',
-        fontSize: 14, lineHeight: 2, color: THEME.text, letterSpacing: 1,
+        fontSize: fs(14), lineHeight: 2, color: THEME.text, letterSpacing: 1,
       }}>
         <div>{parents.father}<ContactDots phone={parents.fatherPhone} /></div>
         <div>{parents.mother}<ContactDots phone={parents.motherPhone} /></div>
       </div>
       <div style={{ width: 20, height: 1, background: THEME.line, margin: '14px auto' }} />
-      <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 11, color: THEME.textMuted, marginBottom: 4 }}>{childLabel}</div>
-      <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: 16, color: THEME.text, letterSpacing: 3 }}>{child}</div>
+      <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, marginBottom: 4 }}>{childLabel}</div>
+      <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(16), color: THEME.text, letterSpacing: 3 }}>{child}</div>
     </FadeIn>
   );
 
@@ -290,14 +291,14 @@ function DateTimeSection() {
       <FadeIn delay={100} style={{ marginTop: 32 }}>
         <div style={{
           fontFamily: '"Cormorant Garamond", serif',
-          fontSize: 40, fontStyle: 'italic', color: THEME.accent,
+          fontSize: fs(40), fontStyle: 'italic', color: THEME.accent,
           fontWeight: 300, letterSpacing: 2, lineHeight: 1,
         }}>
-          <span style={{ fontSize: 26, opacity: 0.6 }}>{d.date.year}.</span>{_pad2(d.date.month)}.{_pad2(d.date.day)}
+          <span style={{ fontSize: fs(26), opacity: 0.6 }}>{d.date.year}.</span>{_pad2(d.date.month)}.{_pad2(d.date.day)}
         </div>
         <div style={{
           fontFamily: '"Noto Serif KR", serif',
-          fontSize: 13, letterSpacing: 4, color: THEME.text, marginTop: 10,
+          fontSize: fs(13), letterSpacing: 4, color: THEME.text, marginTop: 10,
         }}>{d.date.dayOfWeekKo} · {d.date.dayOfWeekEn.toUpperCase()}</div>
       </FadeIn>
 
@@ -306,21 +307,21 @@ function DateTimeSection() {
           <div style={{ width: 20, height: 1, background: THEME.line }} />
           <div style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 18, fontStyle: 'italic', color: THEME.text, letterSpacing: 1,
+            fontSize: fs(18), fontStyle: 'italic', color: THEME.text, letterSpacing: 1,
           }}>{d.date.hourSpaced}</div>
           <div style={{ width: 20, height: 1, background: THEME.line }} />
         </div>
         <div style={{
           fontFamily: '"Noto Sans KR", sans-serif',
-          fontSize: 12, color: THEME.textMuted, marginTop: 6,
+          fontSize: fs(12), color: THEME.textMuted, marginTop: 6,
           fontWeight: 300, letterSpacing: 1,
         }}>{d.date.hourKo}</div>
       </FadeIn>
 
       <FadeIn delay={300} style={{ marginTop: 36, padding: '20px 0', borderTop: `1px solid ${THEME.lineSoft}`, borderBottom: `1px solid ${THEME.lineSoft}` }}>
-        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: 17, color: THEME.text, letterSpacing: 2, marginBottom: 6 }}>{d.venue.name}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12, color: THEME.textSoft, letterSpacing: 0.5, fontWeight: 300 }}>{d.venue.floor} · {d.venue.hall}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 11, color: THEME.textMuted, marginTop: 6, fontWeight: 300 }}>{d.venue.address}</div>
+        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(17), color: THEME.text, letterSpacing: 2, marginBottom: 6 }}>{d.venue.name}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, letterSpacing: 0.5, fontWeight: 300 }}>{d.venue.floor} · {d.venue.hall}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, marginTop: 6, fontWeight: 300 }}>{d.venue.address}</div>
       </FadeIn>
     </section>
   );
@@ -352,8 +353,8 @@ function CalendarSection() {
           background: THEME.card, border: `1px solid ${THEME.lineSoft}`,
         }}>
           <div style={{ textAlign: 'center', marginBottom: 18 }}>
-            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 13, letterSpacing: 4, color: THEME.accent, fontStyle: 'italic' }}>{monthEn}</div>
-            <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: 22, color: THEME.text, letterSpacing: 2, marginTop: 2 }}>{year}</div>
+            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: fs(13), letterSpacing: 4, color: THEME.accent, fontStyle: 'italic' }}>{monthEn}</div>
+            <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(22), color: THEME.text, letterSpacing: 2, marginTop: 2 }}>{year}</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 8 }}>
@@ -361,7 +362,7 @@ function CalendarSection() {
               <div key={w} style={{
                 textAlign: 'center', padding: '6px 0',
                 fontFamily: '"Cormorant Garamond", serif',
-                fontSize: 10, letterSpacing: 1, fontStyle: 'italic',
+                fontSize: fs(10), letterSpacing: 1, fontStyle: 'italic',
                 color: i === 0 ? '#c77070' : i === 6 ? THEME.accent : THEME.textMuted,
               }}>{w}</div>
             ))}
@@ -381,7 +382,7 @@ function CalendarSection() {
                   aspectRatio: '1/1',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontFamily: '"Cormorant Garamond", serif',
-                  fontSize: 14, fontStyle: isTarget ? 'normal' : 'italic',
+                  fontSize: fs(14), fontStyle: isTarget ? 'normal' : 'italic',
                   color: textColor, position: 'relative',
                 }}>
                   {isTarget && (
@@ -397,9 +398,9 @@ function CalendarSection() {
           </div>
 
           <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${THEME.lineSoft}`, textAlign: 'center' }}>
-            <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12, color: THEME.textSoft, fontWeight: 300 }}>
+            <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, fontWeight: 300 }}>
               {d.groom.name}, {d.bride.name}의 결혼식이<br/>
-              <span style={{ color: THEME.accent, fontFamily: '"Cormorant Garamond", serif', fontSize: 15, fontStyle: 'italic', fontWeight: 500, letterSpacing: 1 }}>
+              <span style={{ color: THEME.accent, fontFamily: '"Cormorant Garamond", serif', fontSize: fs(15), fontStyle: 'italic', fontWeight: 500, letterSpacing: 1 }}>
                 {dday > 0 ? `${dday} days` : dday === 0 ? 'Today' : `${Math.abs(dday)} days ago`}
               </span>
               {dday > 0 ? ' 남았습니다' : dday === 0 ? ' 입니다' : ' 지났습니다'}
