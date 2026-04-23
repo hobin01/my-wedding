@@ -18,6 +18,9 @@ const THEME = {
   flowerDensity: 1,
 };
 
+const FONT_SCALE = 1.3;
+const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
+
 // ──────────────────────────────────────────────────────────────────────
 // 페이드인 — IntersectionObserver 기반 잔잔한 등장
 // ──────────────────────────────────────────────────────────────────────
@@ -55,13 +58,13 @@ function SectionTitle({ en, ko, align = 'center' }) {
     <FadeIn style={{ textAlign: align, marginBottom: 28 }}>
       <div style={{
         fontFamily: '"Cormorant Garamond", "Noto Serif KR", serif',
-        fontSize: 13, letterSpacing: 4, textTransform: 'uppercase',
+        fontSize: fs(13), letterSpacing: 4, textTransform: 'uppercase',
         color: THEME.accent, fontStyle: 'italic', fontWeight: 400,
         marginBottom: 10,
       }}>{en}</div>
       <div style={{
         fontFamily: '"Noto Serif KR", serif',
-        fontSize: 17, letterSpacing: 6, color: THEME.text,
+        fontSize: fs(17), letterSpacing: 6, color: THEME.text,
         fontWeight: 400, marginBottom: 14,
       }}>{ko}</div>
       <div style={{ display: 'flex', justifyContent: align === 'center' ? 'center' : 'flex-start', alignItems: 'center', gap: 8 }}>
@@ -98,7 +101,7 @@ function PhotoPlaceholder({ tone, label, width, height, style = {}, rounded = fa
         <div style={{
           position: 'absolute', bottom: 8, left: 10,
           fontFamily: '"JetBrains Mono", "SF Mono", monospace',
-          fontSize: 9, letterSpacing: 0.5,
+          fontSize: fs(9), letterSpacing: 0.5,
           color: 'rgba(255,255,255,0.75)',
           textShadow: '0 1px 2px rgba(0,0,0,0.2)',
         }}>{label}</div>
@@ -133,4 +136,4 @@ function Photo({ src, alt, width, height, style = {}, rounded = false, tone, lab
   );
 }
 
-Object.assign(window, { THEME, useFadeIn, FadeIn, SectionTitle, PhotoPlaceholder, Photo });
+Object.assign(window, { THEME, FONT_SCALE, fs, useFadeIn, FadeIn, SectionTitle, PhotoPlaceholder, Photo });

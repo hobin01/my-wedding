@@ -8,7 +8,7 @@
 window.CONFIG = {
   // ── 메타 정보 ──────────────────────────────────────────────────────────────
   meta: {
-    title: 'Aaa · Bbb의 결혼식에 초대합니다',
+    title: '호호호 · 모모모의 결혼식에 초대합니다',
     description: '2026년 09월 05일 토요일 오후 4시 · 비렌티 웨딩홀',
     // 배포될 절대 URL (끝에 / 포함). 카카오톡 공유 이미지 생성 시 base 로 사용.
     siteUrl: 'https://hb4258.github.io/',
@@ -34,13 +34,13 @@ window.CONFIG = {
 
   // ── 신랑 ──────────────────────────────────────────────────────────────────
   groom: {
-    name: 'Aaa',
-    nameEn: { first: 'aa', full: 'Aaa' },
+    name: '호호호',
+    nameEn: { first: 'hhh', full: 'hhh HHH' },
     // 부모 자녀 호칭 (예: 장남, 차남, 장녀, 차녀 등)
     roleKo: '장남',
     parents: {
-      father: 'Afather',
-      mother: 'Amother',
+      father: '호버지',
+      mother: '호머니',
       fatherRole: '아버지',
       motherRole: '어머니',
       // 빈 문자열이면 해당 부모 연락처 버튼이 표시되지 않습니다.
@@ -55,12 +55,12 @@ window.CONFIG = {
 
   // ── 신부 ──────────────────────────────────────────────────────────────────
   bride: {
-    name: 'Bbb',
-    nameEn: { first: 'bb', full: 'Bbb' },
+    name: '모모모',
+    nameEn: { first: 'mmm', full: 'mmm MMM' },
     roleKo: '장녀',
     parents: {
-      father: 'Bfather',
-      mother: 'Bmother',
+      father: '모버지',
+      mother: '모머니',
       fatherRole: '아버지',
       motherRole: '어머니',
       fatherPhone: '010-0000-0000',
@@ -110,10 +110,10 @@ window.CONFIG = {
   // 식사/주차/화환/드레스 코드 등 예식 당일 실용 정보. 자유롭게 추가·제거하세요.
   // 빈 배열이면 "안내사항" 섹션 자체가 표시되지 않습니다.
   notices: [
-    { icon: '🍽', title: '식사 안내', detail: '예식 종료 후 같은 층 연회장에서 뷔페가 제공됩니다.' },
-    { icon: '🅿', title: '주차 안내', detail: '무료주차가 가능한 편리하고 넓은 지상주차장이 있습니다.' },
+    { icon: '🍽', title: '식사 안내', detail: '예식 종료 후 연회장에서 뷔페가 제공됩니다.' },
+    { icon: '🅿', title: '주차 안내', detail: '무료주차가 가능한 넓은 지상주차장이 있습니다.' },
     { icon: '🚌', title: '셔틀 안내', detail: '예식 1시간 전부터 30분 간격 예식장 셔틀버스가 있습니다.', link: 'https://juso.io/virenti/', linkText: '[셔틀버스 확인]' },
-    { icon: '🚕', title: '택시 안내', detail: '천안아산역(KTX, SRT) 이용 시, 택시 탑승을 권장드립니다. (20분 소요)' },
+    { icon: '🚕', title: '택시 안내', detail: '천안아산역(KTX,SRT) 이용 시, 택시 탑승을 권장드립니다. (20분 소요)' },
   ],
 
   // ── 계좌 안내 ─────────────────────────────────────────────────────────────
@@ -122,14 +122,14 @@ window.CONFIG = {
     // 섹션 상단의 안내 멘트. \n 줄바꿈 지원.
     note: '참석이 어려우신 분들을 위해\n계좌번호를 안내드립니다',
     groom: [
-      { name: 'Aaa', bank: '카카오뱅크', number: '123-456-789012' },
-      { name: 'Afather (父)', bank: '농협', number: '110-234-567890' },
-      { name: 'Amother (母)', bank: '농협', number: '234-567890-123' },
+      { name: '호호호', bank: '카카오뱅크', number: '123-456-789012' },
+      { name: '호버지 (父)', bank: '농협', number: '110-234-567890' },
+      { name: '호머니 (母)', bank: '농협', number: '234-567890-123' },
     ],
     bride: [
-      { name: 'Bbb', bank: '우리은행', number: '1002-345-678901' },
-      { name: 'Bfather (父)', bank: '농협', number: '301-2345-6789-01' },
-      { name: 'Bmother (母)', bank: '카카오뱅크', number: '3333-12-3456789' },
+      { name: '모모모', bank: '우리은행', number: '1002-345-678901' },
+      { name: '모버지 (父)', bank: '농협', number: '301-2345-6789-01' },
+      { name: '모머니 (母)', bank: '카카오뱅크', number: '3333-12-3456789' },
     ],
   },
 
