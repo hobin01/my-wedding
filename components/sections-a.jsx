@@ -6,7 +6,8 @@
 
 const _pad2 = (n) => String(n).padStart(2, '0');
 const _assetPath = (filename) => `./assets/${filename}`;
-const fs = window.fs || ((size) => size);
+const FONT_SCALE = 1.3;
+const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
 // 01. Cover — 표지
 function CoverSection() {
@@ -39,6 +40,7 @@ function CoverSection() {
         flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         marginTop: hero ? 24 : 60,
         padding: hero ? '0 28px' : 0,
+        position: 'relative', zIndex: 2,
       }}>
         <FadeIn>
           <div style={{
@@ -80,8 +82,17 @@ function CoverSection() {
         </FadeIn>
       </div>
 
-      <div style={{ position: 'absolute', bottom: 30, left: 0, right: 0, height: 100, pointerEvents: 'none' }}>
-        <FlowerScatter width={375} height={100} variant={THEME.flowerVariant} density={THEME.flowerDensity * 0.6} />
+      <div style={{
+        position: 'absolute',
+        bottom: hero ? 150 : 140,
+        left: 0,
+        right: 0,
+        height: 130,
+        pointerEvents: 'none',
+        zIndex: 1,
+        opacity: 0.9,
+      }}>
+        <FlowerScatter width={375} height={130} variant={THEME.flowerVariant} density={THEME.flowerDensity * 0.6} />
       </div>
     </section>
   );
@@ -233,17 +244,18 @@ function ParentsSection() {
     const tel = phone.replace(/-/g, '');
     const dotStyle = {
       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      width: 20, height: 20, borderRadius: '50%',
+      padding: '6px',
+      minWidth: 24, minHeight: 24, borderRadius: 20,
       border: `1px solid ${THEME.line}`,
-      color: THEME.textSoft, textDecoration: 'none', marginLeft: 4,
+      color: THEME.textSoft, textDecoration: 'none',
     };
     return (
-      <span style={{ display: 'inline-flex', marginLeft: 8, verticalAlign: 'middle' }}>
+      <span style={{ display: 'inline-flex', gap: 12, marginLeft: 8, verticalAlign: 'middle' }}>
         <a href={`tel:${tel}`} aria-label="전화" style={dotStyle}>
-          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M3 1.5h2l1 2.5-1.5 1a6 6 0 003 3l1-1.5 2.5 1v2a1 1 0 01-1 1A8 8 0 012 2.5a1 1 0 011-1z"/></svg>
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M3 1.5h2l1 2.5-1.5 1a6 6 0 003 3l1-1.5 2.5 1v2a1 1 0 01-1 1A8 8 0 012 2.5a1 1 0 011-1z"/></svg>
         </a>
         <a href={`sms:${tel}`} aria-label="문자" style={dotStyle}>
-          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M1 3l5 3.5L11 3M1 3v6a1 1 0 001 1h8a1 1 0 001-1V3M1 3a1 1 0 011-1h8a1 1 0 011 1"/></svg>
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M1 3l5 3.5L11 3M1 3v6a1 1 0 001 1h8a1 1 0 001-1V3M1 3a1 1 0 011-1h8a1 1 0 011 1"/></svg>
         </a>
       </span>
     );

@@ -2,7 +2,8 @@
 // 청첩장 섹션 — Part B (Gallery / Map / Accounts / Share / Footer)
 // 모든 표시 값은 window.INVITE_DATA (config.js 에서 파생) 를 참조합니다.
 // ──────────────────────────────────────────────────────────────────────
-const fs = window.fs || ((size) => size);
+const FONT_SCALE = 1.3;
+const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
 // 07. Gallery — 라이트박스 (assets/gallery/ 자동 탐색 결과 사용)
 // 기본 7장(Hero 1 + Strip 4 + Grid 2) 까지 표시하고, 초과분은 "사진 더 보기" 토글로 확장.
@@ -401,7 +402,7 @@ function AccountsSection() {
     }}>
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, letterSpacing: 0.5, marginBottom: 2 }}>{a.bank} · {a.name}</div>
-        <div style={{ fontFamily: '"Cormorant Garamond", "SF Mono", monospace', fontSize: fs(14), color: THEME.text, letterSpacing: 1 }}>{a.number}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(14), color: THEME.text, letterSpacing: 1 }}>{a.number}</div>
       </div>
       <button onClick={() => copy(a.number, `${side}-${a.name}`)}
         style={{

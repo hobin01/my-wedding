@@ -18,7 +18,7 @@ const THEME = {
   flowerDensity: 1,
 };
 
-const FONT_SCALE = 1.5;
+const FONT_SCALE = 1.3;
 const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
 // ──────────────────────────────────────────────────────────────────────
