@@ -347,7 +347,14 @@ function NoticeSection() {
                 fontFamily: '"Noto Sans KR", sans-serif', fontSize: 12,
                 color: THEME.textSoft, lineHeight: 1.7, fontWeight: 300,
                 whiteSpace: 'pre-line',
-              }}>{item.detail}</div>
+              }}>{item.detail}
+              {item.link && (<>
+                <br />
+                <a href={item.link} target="_blank" rel="noopener noreferrer"
+                  style={{color: THEME.text, textDecoration: 'underline', fontWeight: 500,}}>
+                  {item.linkText || '바로가기'}
+                </a></>)}
+              </div>
             </div>
           </div>
         ))}
