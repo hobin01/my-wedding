@@ -11,7 +11,7 @@ window.CONFIG = {
     title: '호호호 · 모모모의 결혼식에 초대합니다',
     description: '2026년 xx월 xx일 토요일 오후 4시 · 비렌티 웨딩홀',
     // 배포될 절대 URL (끝에 / 포함). 카카오톡 공유 이미지 생성 시 base 로 사용.
-    siteUrl: 'https://hb4258.github.io/wedding',
+    siteUrl: 'https://hb4258.github.io/my-wedding',
     // assets/ 기준 상대 경로. og.jpg 권장 사양: 1200×630, JPG, ≤300KB
     ogImage: 'og.jpg',
     // assets/ 기준 상대 경로. favicon.png 권장 사양: 180×180, PNG
