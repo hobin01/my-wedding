@@ -13,7 +13,7 @@ window.CONFIG = {
     // 배포될 절대 URL (끝에 / 포함). 카카오톡 공유 이미지 생성 시 base 로 사용.
     siteUrl: 'https://hobin01.github.io/my-wedding/',
     // assets/ 기준 상대 경로. og.jpg 권장 사양: 1200×630, JPG, ≤300KB
-    ogImage: 'og-1.jpg',
+    ogImage: 'og.jpg',
     // assets/ 기준 상대 경로. favicon.png 권장 사양: 180×180, PNG
     favicon: 'favicon.png',
     // Cover 섹션 상단에 표시되는 대표 사진. assets/ 기준 파일명.

@@ -8,3 +8,8 @@
 ## 웹페이지 
 
 https://hobin01.github.io/my-wedding
+
+## 카카오톡 공유 썸네일 변경 안 될 시 아래에서 초기화 진행
+
+https://developers.kakao.com/tool/debugger/sharing
+
