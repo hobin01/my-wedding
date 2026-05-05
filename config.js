@@ -115,7 +115,7 @@ window.CONFIG = {
   notices: [
     { icon: '🍽', title: '식사 안내', detail: '예식 종료 후 연회장에서 뷔페가 제공됩니다.' },
     { icon: '🅿', title: '주차 안내', detail: '무료주차가 가능한 넓은 지상주차장이 있습니다.' },
-    { icon: '🚌', title: '셔틀 안내', detail: '예식 1시간 전부터 30분 간격 예식장 셔틀버스가 있습니다.', link: 'https://juso.io/virenti/', linkText: '[셔틀버스 확인]' },
+    { icon: '🚌', title: '셔틀 안내', detail: '예식 1시간 전부터 30분 간격 예식장 셔틀버스가 있습니다.', link: 'https://juso.io/virenti/', linkText: '[셔틀버스 안내]' },
     { icon: '🚕', title: '택시 안내', detail: '천안아산역(KTX,SRT) 이용 시, 택시 탑승을 권장드립니다. (20분 소요)' },
   ],
 
