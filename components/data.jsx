@@ -85,6 +85,7 @@
     invitation: CONFIG.invitation,
     quote: CONFIG.quote || null,
     transport: CONFIG.transport,
+    rentalBuses: CONFIG.rentalBuses || [],
     notices: CONFIG.notices || [],
   };
 
