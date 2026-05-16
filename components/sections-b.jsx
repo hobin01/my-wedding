@@ -554,7 +554,7 @@ function ShareSection() {
           link: { mobileWebUrl: pageUrl, webUrl: pageUrl },
         },
         buttons: [{
-          title: '청첩장 보기',
+          title: '모바일 청첩장 보기 🧡',
           link: { mobileWebUrl: pageUrl, webUrl: pageUrl },
         }],
       });
