@@ -318,7 +318,76 @@ function MapSection() {
   );
 }
 
-// 08.5 Notice — 하객 안내 (식사/주차/화환/드레스 코드 등)
+// 08.5 Rental Bus — 추가 전세 버스 탑승 정보
+function RentalBusesSection() {
+  const d = window.INVITE_DATA;
+  const rentalBuses = d.rentalBuses || [];
+  if (rentalBuses.length === 0) return null;
+
+  const MetaLine = ({ label, value }) => (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '64px 1fr', gap: 12,
+      alignItems: 'baseline', padding: '7px 0',
+      borderTop: `1px solid ${THEME.lineSoft}`,
+    }}>
+      <div style={{
+        fontFamily: '"Noto Sans KR", sans-serif',
+        fontSize: fs(10), color: THEME.textMuted,
+        letterSpacing: 1, fontWeight: 300,
+      }}>{label}</div>
+      <div style={{
+        fontFamily: '"Noto Sans KR", sans-serif',
+        fontSize: fs(12), color: THEME.textSoft,
+        lineHeight: 1.6, fontWeight: 300,
+      }}>{value}</div>
+    </div>
+  );
+
+  return (
+    <section style={{ padding: '60px 28px 60px', background: THEME.bgAccent }}>
+      <SectionTitle en="Rental Bus" ko="하 객 버 스" />
+
+      <FadeIn delay={100} style={{ marginTop: 28, display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {rentalBuses.map((item, i) => (
+          <div key={i} style={{
+            background: THEME.card,
+            border: `1px solid ${THEME.lineSoft}`,
+            padding: '18px 16px 14px',
+          }}>
+            <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 14 }}>
+              <div style={{
+                width: 34, height: 34, borderRadius: '50%',
+                border: `1px solid ${THEME.accent}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: '"Cormorant Garamond", serif',
+                fontSize: fs(13), color: THEME.accent, fontStyle: 'italic',
+                flexShrink: 0,
+              }}>{String(i + 1).padStart(2, '0')}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  fontFamily: '"Noto Serif KR", serif',
+                  fontSize: fs(15), color: THEME.text,
+                  letterSpacing: 1, marginBottom: 5,
+                }}>{item.label}</div>
+                <div style={{
+                  fontFamily: '"Noto Sans KR", sans-serif',
+                  fontSize: fs(12), color: THEME.accent,
+                  lineHeight: 1.6, fontWeight: 400,
+                }}>{item.route}</div>
+              </div>
+            </div>
+
+            <MetaLine label="출발 시간" value={item.time} />
+            <MetaLine label="탑승 장소" value={item.place} />
+            {item.note && <MetaLine label="안내" value={item.note} />}
+          </div>
+        ))}
+      </FadeIn>
+    </section>
+  );
+}
+
+// 09. Notice — 하객 안내 (식사/주차/화환/드레스 코드 등)
 function NoticeSection() {
   const d = window.INVITE_DATA;
   const notices = d.notices || [];
@@ -365,7 +434,7 @@ function NoticeSection() {
   );
 }
 
-// 09. Accounts — 계좌번호 복사
+// 10. Accounts — 계좌번호 복사
 function AccountsSection() {
   const d = window.INVITE_DATA;
   const [open, setOpen] = React.useState(null);
@@ -451,7 +520,7 @@ function AccountsSection() {
   );
 }
 
-// 10. Share — 카카오 공유 + 링크 복사
+// 11. Share — 카카오 공유 + 링크 복사
 // imageUrl 과 link 는 절대 URL 이어야 합니다 (카카오 공유 썸네일 요건).
 // config.meta.siteUrl 이 설정되어 있으면 그 값, 아니면 현재 페이지 URL 기준으로 계산합니다.
 function ShareSection() {
@@ -462,7 +531,10 @@ function ShareSection() {
   const isPlaceholder = !meta.siteUrl || meta.siteUrl.includes('YOURNAME');
   const currentDir = `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, '')}`;
   const baseUrl = isPlaceholder ? currentDir : meta.siteUrl;
-  const pageUrl = isPlaceholder ? window.location.href : meta.siteUrl;
+  const inviteHash = window.location.hash && window.location.hash.startsWith('#invite=')
+    ? window.location.hash
+    : '';
+  const pageUrl = isPlaceholder ? window.location.href : `${meta.siteUrl}${inviteHash}`;
   const imageUrl = new URL(`assets/${meta.ogImage}`, baseUrl).href;
 
   const copyLink = async () => {
@@ -524,7 +596,7 @@ function ShareSection() {
   );
 }
 
-// 11. Footer
+// 12. Footer
 function FooterSection() {
   return (
     <section style={{ padding: '50px 28px 80px', background: THEME.bg, textAlign: 'center', position: 'relative' }}>
@@ -541,4 +613,4 @@ function FooterSection() {
   );
 }
 
-Object.assign(window, { GallerySection, MapSection, NoticeSection, AccountsSection, ShareSection, FooterSection });
+Object.assign(window, { GallerySection, MapSection, RentalBusesSection, NoticeSection, AccountsSection, ShareSection, FooterSection });

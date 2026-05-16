@@ -39,6 +39,11 @@ build/
 .env.development.local
 .env.production.local
 
+# ─── 청첩장 실제 정보 / 원본 이미지 / 로컬 암호화 도구 ───────────────
+# GitHub Pages 에는 encrypted/ 산출물만 올리고, private/ 아래 평문 데이터와
+# 원본 사진, 초대 키 생성/암호화 도구는 이 로컬 작업공간에만 둡니다.
+private/
+
 # ─── Claude Code 세션 (개인 설정) ─────────────────────────
 .claude/
 

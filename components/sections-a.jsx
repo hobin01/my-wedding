@@ -5,7 +5,8 @@
 // ──────────────────────────────────────────────────────────────────────
 
 const _pad2 = (n) => String(n).padStart(2, '0');
-const _assetPath = (filename) => `./assets/${filename}`;
+const _isDirectAsset = (value) => value && (value.startsWith('./') || value.startsWith('/') || value.includes('://') || value.startsWith('blob:') || value.startsWith('data:'));
+const _assetPath = (filename) => _isDirectAsset(filename) ? filename : `./assets/${filename}`;
 const FONT_SCALE = 1.3;
 const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
@@ -23,7 +24,7 @@ function CoverSection() {
     }}>
       {hero ? (
         <div style={{ position: 'relative', width: '100%', height: 360, overflow: 'hidden' }}>
-          <Photo src={`./assets/${hero}`} width="100%" height="100%" alt="" eager={true} />
+          <Photo src={_assetPath(hero)} width="100%" height="100%" alt="" eager={true} />
           {/* 하단으로 갈수록 배경과 자연스럽게 이어지도록 그라디언트 오버레이 */}
           <div style={{
             position: 'absolute', inset: 0, pointerEvents: 'none',
