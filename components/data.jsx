@@ -4,10 +4,13 @@
 // 이 파일은 수정할 필요 없습니다. 내용 교체는 config.js 에서만 하세요.
 // ─────────────────────────────────────────────────────────────────────────────
 (function () {
+function buildInviteData() {
+  const buildId = (window.__inviteDataBuildId || 0) + 1;
+  window.__inviteDataBuildId = buildId;
   const CONFIG = window.CONFIG;
   if (!CONFIG) {
     console.error('[invitation] config.js 가 먼저 로드되어야 합니다.');
-    return;
+    return false;
   }
 
   // ── 날짜 파생 ───────────────────────────────────────────────────────────
@@ -17,7 +20,7 @@
   const isoMatch = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(CONFIG.date.datetime);
   if (!isoMatch) {
     console.error('[invitation] config.date.datetime 은 ISO 8601 형식이어야 합니다. 예: 2026-11-07T13:30:00+09:00');
-    return;
+    return false;
   }
   const year = +isoMatch[1];
   const monthIdx = +isoMatch[2] - 1;
@@ -100,7 +103,7 @@
     const base = './assets/gallery/';
 
     if (Array.isArray(gc.files) && gc.files.length > 0) {
-      return gc.files.map((f) => (f.startsWith('./') || f.startsWith('/') || f.includes('://')) ? f : base + f);
+      return gc.files.map((f) => (f.startsWith('./') || f.startsWith('/') || f.includes('://') || f.startsWith('blob:') || f.startsWith('data:')) ? f : base + f);
     }
 
     const max = gc.maxScan || 30;
@@ -139,8 +142,14 @@
   }
 
   discoverGallery().then((list) => {
+    if (window.__inviteDataBuildId !== buildId) return;
     window.GALLERY_LIST = list;
     window.__galleryReady = true;
     window.dispatchEvent(new CustomEvent('gallery-ready', { detail: list }));
   });
+  return true;
+}
+
+window.buildInviteData = buildInviteData;
+buildInviteData();
 })();

@@ -531,7 +531,10 @@ function ShareSection() {
   const isPlaceholder = !meta.siteUrl || meta.siteUrl.includes('YOURNAME');
   const currentDir = `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, '')}`;
   const baseUrl = isPlaceholder ? currentDir : meta.siteUrl;
-  const pageUrl = isPlaceholder ? window.location.href : meta.siteUrl;
+  const inviteHash = window.location.hash && window.location.hash.startsWith('#invite=')
+    ? window.location.hash
+    : '';
+  const pageUrl = isPlaceholder ? window.location.href : `${meta.siteUrl}${inviteHash}`;
   const imageUrl = new URL(`assets/${meta.ogImage}`, baseUrl).href;
 
   const copyLink = async () => {
