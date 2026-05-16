@@ -161,7 +161,20 @@ window.CONFIG = {
   // 01 부터 순서대로 자동 탐색합니다 (빈 번호가 나오면 중단).
   // 직접 지정하려면 files: ['a.jpg', 'b.png', ...] 형태로 배열을 넣으세요.
   gallery: {
-    files: null,
+    files: [
+      '01.jpg',
+      '02.jpg',
+      '03.jpg',
+      '04.jpg',
+      '05.jpg',
+      '06.jpg',
+      '07.jpg',
+      '08.jpg',
+      '09.jpg',
+      '10.jpg',
+      '11.jpg',
+      '12.jpg',
+    ],
     maxScan: 30,
   },
 };
