@@ -18,8 +18,9 @@ const THEME = {
   flowerDensity: 1,
 };
 
-const FONT_SCALE = 1.3;
-const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
+const DEFAULT_FONT_SCALE = 1.3;
+const getFontScale = () => Number(window.CONFIG && window.CONFIG.ui && window.CONFIG.ui.fontScale) || DEFAULT_FONT_SCALE;
+const fs = (size) => Math.round(size * getFontScale() * 100) / 100;
 
 // ──────────────────────────────────────────────────────────────────────
 // 페이드인 — IntersectionObserver 기반 잔잔한 등장
@@ -136,4 +137,8 @@ function Photo({ src, alt, width, height, style = {}, rounded = false, tone, lab
   );
 }
 
-Object.assign(window, { THEME, FONT_SCALE, fs, useFadeIn, FadeIn, SectionTitle, PhotoPlaceholder, Photo });
+Object.defineProperty(window, 'FONT_SCALE', {
+  configurable: true,
+  get: getFontScale,
+});
+Object.assign(window, { THEME, getFontScale, fs, useFadeIn, FadeIn, SectionTitle, PhotoPlaceholder, Photo });

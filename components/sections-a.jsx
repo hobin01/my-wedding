@@ -7,8 +7,6 @@
 const _pad2 = (n) => String(n).padStart(2, '0');
 const _isDirectAsset = (value) => value && (value.startsWith('./') || value.startsWith('/') || value.includes('://') || value.startsWith('blob:') || value.startsWith('data:'));
 const _assetPath = (filename) => _isDirectAsset(filename) ? filename : `./assets/${filename}`;
-const FONT_SCALE = 1.3;
-const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
 // 01. Cover — 표지
 function CoverSection() {
@@ -118,9 +116,9 @@ function InvitationSection() {
           }}>“</div>
           <div style={{
             fontFamily: '"Noto Serif KR", serif',
-            fontSize: fs(14), lineHeight: 2, letterSpacing: 1,
+            fontSize: fs(12), lineHeight: 2, letterSpacing: 1,
             color: THEME.text, whiteSpace: 'pre-line', fontWeight: 300,
-            fontStyle: 'italic',
+            fontStyle: 'italic', wordBreak: 'keep-all', overflowWrap: 'break-word',
           }}>{quote.text}</div>
           {quote.author && (
             <div style={{
@@ -139,8 +137,9 @@ function InvitationSection() {
       <FadeIn delay={100} style={{ marginTop: quote ? 0 : 24 }}>
         <div style={{
           fontFamily: '"Noto Serif KR", serif',
-          fontSize: fs(15), lineHeight: 2.2, letterSpacing: 0.5,
+          fontSize: fs(12), lineHeight: 2.2, letterSpacing: 0.5,
           color: THEME.textSoft, whiteSpace: 'pre-line', fontWeight: 300,
+          wordBreak: 'keep-all', overflowWrap: 'break-word',
         }}>{d.invitation}</div>
       </FadeIn>
 
@@ -149,6 +148,7 @@ function InvitationSection() {
         <div style={{
           fontFamily: '"Noto Serif KR", serif',
           fontSize: fs(13), lineHeight: 2, color: THEME.text, letterSpacing: 1,
+          wordBreak: 'keep-all', overflowWrap: 'break-word',
         }}>
           <div>
             {gf} <span style={{ color: THEME.textMuted, fontSize: fs(11) }}>· </span>{gm}
@@ -274,7 +274,7 @@ function ParentsSection() {
       <div style={{
         fontFamily: '"Cormorant Garamond", serif',
         fontSize: fs(11), letterSpacing: 3, color: THEME.accent, fontStyle: 'italic',
-        marginBottom: 14, textTransform: 'uppercase',
+        marginBottom: 14, textTransform: 'uppercase', whiteSpace: 'pre-line', lineHeight: 1.4,
       }}>{title}</div>
       <div style={{
         fontFamily: '"Noto Serif KR", serif',
@@ -293,9 +293,9 @@ function ParentsSection() {
     <section style={{ padding: '60px 28px 60px', background: THEME.bg }}>
       <SectionTitle en="Family" ko="양 가 부 모" />
       <div style={{ display: 'flex', gap: 16, marginTop: 36, alignItems: 'stretch' }}>
-        <Side title="Groom's Family" parents={d.groom.parents} child={d.groom.name} childLabel={d.groom.roleKo} delay={100} />
+        <Side title={"Groom's\nFamily"} parents={d.groom.parents} child={d.groom.name} childLabel={d.groom.roleKo} delay={100} />
         <div style={{ width: 1, background: THEME.lineSoft }} />
-        <Side title="Bride's Family" parents={d.bride.parents} child={d.bride.name} childLabel={d.bride.roleKo} delay={200} />
+        <Side title={"Bride's\nFamily"} parents={d.bride.parents} child={d.bride.name} childLabel={d.bride.roleKo} delay={200} />
       </div>
     </section>
   );
@@ -341,7 +341,7 @@ function DateTimeSection() {
       <FadeIn delay={300} style={{ marginTop: 36, padding: '20px 0', borderTop: `1px solid ${THEME.lineSoft}`, borderBottom: `1px solid ${THEME.lineSoft}` }}>
         <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(17), color: THEME.text, letterSpacing: 2, marginBottom: 6 }}>{d.venue.name}</div>
         <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, letterSpacing: 0.5, fontWeight: 300 }}>{d.venue.floor} · {d.venue.hall}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, marginTop: 6, fontWeight: 300 }}>{d.venue.address}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, marginTop: 6, fontWeight: 300, wordBreak: 'keep-all', overflowWrap: 'break-word' }}>{d.venue.address}</div>
       </FadeIn>
     </section>
   );
