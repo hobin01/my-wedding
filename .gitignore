@@ -51,3 +51,7 @@ private/
 # 이 템플릿의 assets/ 와 assets/gallery/ 는 더미 이미지로 이미 채워져 있어
 # .gitkeep 없이도 커밋 대상이 됩니다. 혹시 남아 있더라도 커밋하지 않도록 ignore.
 .gitkeep
+
+# 에이전트 지침용 
+AGENTS.md
+
