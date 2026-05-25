@@ -13,3 +13,8 @@ https://hobin01.github.io/my-wedding
 
 https://developers.kakao.com/tool/debugger/sharing
 
+## 개발용 로컬 서버 확인
+
+python3 -m http.server 8000
+
+http://127.0.0.1:8000/

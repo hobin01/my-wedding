@@ -25,6 +25,13 @@ window.CONFIG = {
     kakaoAppKey: '0ea5558172608f8c2db792e5dfe27dc3',
   },
 
+  // ── 화면/글자 크기 ───────────────────────────────────────────────────────
+  // 전체 컴포넌트의 fs(...) 글자 크기에 곱해지는 값입니다.
+  // 기본값 1.3. 줄바꿈이 어색하면 1.2 ~ 1.25 정도로 낮춰보세요.
+  ui: {
+    fontScale: 1.3,
+  },
+
   // ── 인용구 (Cover 와 초대의 글 사이에 표시) ────────────────────────────────
   // text 가 빈 문자열이면 인용구 블록 자체가 숨겨집니다.
   quote: {
@@ -43,11 +50,14 @@ window.CONFIG = {
       mother: '호머니',
       fatherRole: '아버지',
       motherRole: '어머니',
-      // 빈 문자열이면 해당 부모 연락처 버튼이 표시되지 않습니다.
+      // exposePhone 이 true 이고 전화번호가 있을 때만 연락처 버튼이 표시됩니다.
       fatherPhone: '010-0000-0000',
+      fatherExposePhone: false,
       motherPhone: '010-0000-0000',
+      motherExposePhone: false,
     },
     phone: '010-0000-0000',
+    exposePhone: false,
     // assets/ 기준 파일명. 권장 사양: 480×600, JPG, ≤200KB
     // 파일이 없으면 그라디언트 플레이스홀더로 자동 대체됩니다.
     photo: 'groom.jpg',
@@ -64,9 +74,12 @@ window.CONFIG = {
       fatherRole: '아버지',
       motherRole: '어머니',
       fatherPhone: '010-0000-0000',
+      fatherExposePhone: true,
       motherPhone: '010-0000-0000',
+      motherExposePhone: true,
     },
     phone: '010-0000-0000',
+    exposePhone: true,
     photo: 'bride.jpg',
   },
 

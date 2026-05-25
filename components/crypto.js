@@ -73,17 +73,33 @@
     delete config.encryptedAssets;
   }
 
+  function applyPhoneExposureOverrides(config, fallbackConfig) {
+    const forceFalse = (target, source, key) => {
+      if (source && source[key] === false && target) target[key] = false;
+    };
+
+    ['groom', 'bride'].forEach((side) => {
+      const target = config[side];
+      const source = fallbackConfig && fallbackConfig[side];
+      forceFalse(target, source, 'exposePhone');
+      forceFalse(target && target.parents, source && source.parents, 'fatherExposePhone');
+      forceFalse(target && target.parents, source && source.parents, 'motherExposePhone');
+    });
+  }
+
   async function applyEncryptedInvite() {
     const token = getInviteToken();
     if (!token) return { ok: false, reason: 'missing' };
 
     try {
+      const fallbackConfig = window.CONFIG;
       const key = await deriveKey(token);
       const res = await fetch(PAYLOAD_URL, { cache: 'no-store' });
       if (!res.ok) return { ok: false, reason: 'unavailable' };
       const encrypted = await res.json();
       const plaintext = await decryptObject(encrypted, key);
       const config = JSON.parse(new TextDecoder().decode(plaintext));
+      applyPhoneExposureOverrides(config, fallbackConfig);
       await decryptAssets(config, key);
       window.CONFIG = config;
       window.__INVITE_DECRYPTED = true;

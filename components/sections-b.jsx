@@ -2,8 +2,6 @@
 // 청첩장 섹션 — Part B (Gallery / Map / Accounts / Share / Footer)
 // 모든 표시 값은 window.INVITE_DATA (config.js 에서 파생) 를 참조합니다.
 // ──────────────────────────────────────────────────────────────────────
-const FONT_SCALE = 1.3;
-const fs = (size) => Math.round(size * FONT_SCALE * 100) / 100;
 
 // 07. Gallery — 라이트박스 (assets/gallery/ 자동 탐색 결과 사용)
 // 기본 7장(Hero 1 + Strip 4 + Grid 2) 까지 표시하고, 초과분은 "사진 더 보기" 토글로 확장.
@@ -282,7 +280,7 @@ function MapSection() {
         </div>
 
         <div style={{ marginTop: 16, fontFamily: '"Noto Serif KR", serif', fontSize: fs(15), color: THEME.text, letterSpacing: 1, textAlign: 'center' }}>{name}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, textAlign: 'center', marginTop: 4, fontWeight: 300 }}>{address}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, textAlign: 'center', marginTop: 4, fontWeight: 300, wordBreak: 'keep-all', overflowWrap: 'break-word' }}>{address}</div>
 
         <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
           <button onClick={openNaver} style={btnStyle}>네이버 지도</button>
@@ -308,7 +306,7 @@ function MapSection() {
               }}>{item.icon}</div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(13), color: THEME.text, fontWeight: 500, marginBottom: 3 }}>{item.label}</div>
-                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, lineHeight: 1.6, fontWeight: 300 }}>{item.detail}</div>
+                <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12), color: THEME.textSoft, lineHeight: 1.6, fontWeight: 300, wordBreak: 'keep-all', overflowWrap: 'break-word' }}>{item.detail}</div>
               </div>
             </div>
           ))}
@@ -339,6 +337,7 @@ function RentalBusesSection() {
         fontFamily: '"Noto Sans KR", sans-serif',
         fontSize: fs(12), color: THEME.textSoft,
         lineHeight: 1.6, fontWeight: 300,
+        wordBreak: 'keep-all', overflowWrap: 'break-word',
       }}>{value}</div>
     </div>
   );
@@ -373,6 +372,7 @@ function RentalBusesSection() {
                   fontFamily: '"Noto Sans KR", sans-serif',
                   fontSize: fs(12), color: THEME.accent,
                   lineHeight: 1.6, fontWeight: 400,
+                  wordBreak: 'keep-all', overflowWrap: 'break-word',
                 }}>{item.route}</div>
               </div>
             </div>
@@ -418,6 +418,7 @@ function NoticeSection() {
                 fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(12),
                 color: THEME.textSoft, lineHeight: 1.7, fontWeight: 300,
                 whiteSpace: 'pre-line',
+                wordBreak: 'keep-all', overflowWrap: 'break-word',
               }}>{item.detail}
               {item.link && (<>
                 <br />
@@ -494,6 +495,7 @@ function AccountsSection() {
             fontSize: fs(12), color: THEME.textSoft, lineHeight: 2,
             fontWeight: 300, letterSpacing: 0.5, marginBottom: 28,
             whiteSpace: 'pre-line',
+            wordBreak: 'keep-all', overflowWrap: 'break-word',
           }}>{note}</div>
         </FadeIn>
       )}
@@ -605,7 +607,7 @@ function FooterSection() {
       </FadeIn>
       <FadeIn delay={100}>
         <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: fs(12), letterSpacing: 4, color: THEME.accent, fontStyle: 'italic', marginBottom: 10 }}>THANK YOU</div>
-        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(13), color: THEME.textSoft, lineHeight: 2, fontWeight: 300 }}>
+        <div style={{ fontFamily: '"Noto Serif KR", serif', fontSize: fs(13), color: THEME.textSoft, lineHeight: 2, fontWeight: 300, wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
           함께해 주시는 모든 분들께<br/>진심으로 감사드립니다
         </div>
       </FadeIn>
