@@ -529,6 +529,7 @@ function ShareSection() {
   const d = window.INVITE_DATA;
   const meta = d.meta;
   const [linkCopied, setLinkCopied] = React.useState(false);
+  const showCopyButton = false;
 
   const isPlaceholder = !meta.siteUrl || meta.siteUrl.includes('YOURNAME');
   const currentDir = `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, '')}`;
@@ -582,16 +583,18 @@ function ShareSection() {
             </svg>
             카카오톡 공유하기
           </button>
-          <button onClick={copyLink} style={{
-            padding: '14px 16px', background: THEME.card,
-            border: `1px solid ${THEME.line}`, borderRadius: 0,
-            fontFamily: '"Noto Sans KR", sans-serif',
-            fontSize: fs(12), color: THEME.textSoft, letterSpacing: 1, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', gap: 6,
-          }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M5.5 8.5L8.5 5.5M4 9.5l-1 1a2.1 2.1 0 01-3-3l2.5-2.5a2.1 2.1 0 013 0M10 4.5l1-1a2.1 2.1 0 013 3l-2.5 2.5a2.1 2.1 0 01-3 0"/></svg>
-            {linkCopied ? '복사됨' : '링크복사'}
-          </button>
+          {showCopyButton && (
+            <button onClick={copyLink} style={{
+              padding: '14px 16px', background: THEME.card,
+              border: `1px solid ${THEME.line}`, borderRadius: 0,
+              fontFamily: '"Noto Sans KR", sans-serif',
+              fontSize: fs(12), color: THEME.textSoft, letterSpacing: 1, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 6,
+            }}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M5.5 8.5L8.5 5.5M4 9.5l-1 1a2.1 2.1 0 01-3-3l2.5-2.5a2.1 2.1 0 013 0M10 4.5l1-1a2.1 2.1 0 013 3l-2.5 2.5a2.1 2.1 0 01-3 0"/></svg>
+              {linkCopied ? '복사됨' : '링크복사'}
+            </button>
+          )}
         </div>
       </FadeIn>
     </section>
