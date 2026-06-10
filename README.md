@@ -13,6 +13,10 @@ https://hobin01.github.io/my-wedding
 
 https://developers.kakao.com/tool/debugger/sharing
 
+아래 2개 url 모두 캐시 초기화 필요
+- https://hobin01.github.io/my-wedding
+- https://hobin01.github.io/my-wedding/ 
+
 ## 개발용 로컬 서버 확인
 
 python3 -m http.server 8000
