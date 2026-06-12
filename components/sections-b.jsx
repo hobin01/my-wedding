@@ -42,7 +42,9 @@ function GallerySection() {
 
       <FadeIn delay={100}>
         <div style={{ padding: '30px 28px 0', position: 'relative' }}>
-          <Photo src={hero} width="100%" height={280} alt="Gallery hero" />
+          <div style={{ aspectRatio: '2 / 3' }}>
+            <Photo src={hero} width="100%" height="100%" alt="Gallery hero" />
+          </div>
           <div onClick={() => setLightbox(0)}
             style={{ position: 'absolute', inset: '30px 28px 0', cursor: 'pointer' }} />
         </div>
@@ -58,7 +60,7 @@ function GallerySection() {
             {strip.map((src, i) => (
               <div key={i} onClick={() => setLightbox(i + 1)}
                 style={{ flexShrink: 0, cursor: 'pointer', scrollSnapAlign: 'start' }}>
-                <Photo src={src} width={138} height={180} alt={`Gallery ${i + 2}`} />
+                <Photo src={src} width={138} height={207} alt={`Gallery ${i + 2}`} />
               </div>
             ))}
           </div>
@@ -72,8 +74,8 @@ function GallerySection() {
             display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6,
           }}>
             {grid.map((src, i) => (
-              <div key={i} onClick={() => setLightbox(i + 5)} style={{ cursor: 'pointer' }}>
-                <Photo src={src} width="100%" height={140} alt={`Gallery ${i + 6}`} />
+              <div key={i} onClick={() => setLightbox(i + 5)} style={{ cursor: 'pointer', aspectRatio: '2 / 3' }}>
+                <Photo src={src} width="100%" height="100%" alt={`Gallery ${i + 6}`} />
               </div>
             ))}
           </div>
@@ -125,7 +127,7 @@ function Lightbox({ photos, index, onClose, onChange }) {
       zIndex: 100, display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center', padding: 20,
     }}>
-      <div onClick={(e) => e.stopPropagation()} style={{ width: '85%', maxWidth: 320, aspectRatio: '3/4', position: 'relative' }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ width: '85%', maxWidth: 320, aspectRatio: '2 / 3', position: 'relative' }}>
         <Photo src={photos[index]} width="100%" height="100%" alt={`Photo ${index + 1}`} eager={true} />
       </div>
       <div style={{
