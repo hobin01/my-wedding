@@ -13,13 +13,13 @@ window.CONFIG = {
     // 배포될 절대 URL (끝에 / 포함). 카카오톡 공유 이미지 생성 시 base 로 사용.
     siteUrl: 'https://hobin01.github.io/my-wedding/',
     // assets/ 기준 상대 경로. og.jpg 권장 사양: 1200×630, JPG, ≤300KB
-    ogImage: 'og-tmp.jpg',
+    ogImage: 'og-base.jpg',
     // assets/ 기준 상대 경로. favicon.png 권장 사양: 180×180, PNG
     favicon: 'favicon.png',
     // Cover 섹션 상단에 표시되는 대표 사진. assets/ 기준 파일명.
     // null 이면 기존의 순수 텍스트 Cover 레이아웃이 유지됩니다.
     // 권장 사양: 세로 긴 비율 (예: 960×1200), JPG, ≤400KB.
-    heroImage: 'hero-tmp.jpg',
+    heroImage: 'hero-base.jpg',
     // 카카오 JavaScript 키. 빈 문자열이거나 "DUMMY"/"YOUR_" 접두어가 있으면 비활성.
     // 하나의 JS 키로 "카카오톡 공유" + "카카오맵 JS SDK" 둘 다 사용 가능합니다.
     kakaoAppKey: '0ea5558172608f8c2db792e5dfe27dc3',
@@ -60,7 +60,7 @@ window.CONFIG = {
     exposePhone: false,
     // assets/ 기준 파일명. 권장 사양: 480×600, JPG, ≤200KB
     // 파일이 없으면 그라디언트 플레이스홀더로 자동 대체됩니다.
-    photo: 'groom-tmp.jpg',
+    photo: 'groom-base.jpg',
   },
 
   // ── 신부 ──────────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ window.CONFIG = {
     },
     phone: '010-0000-0000',
     exposePhone: true,
-    photo: 'bride-tmp.jpg',
+    photo: 'bride-base.jpg',
   },
 
   // ── 일시 ──────────────────────────────────────────────────────────────────
