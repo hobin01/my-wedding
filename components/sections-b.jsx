@@ -524,31 +524,43 @@ function AccountsSection() {
   );
 }
 
-// 11. Share — 카카오 공유 + 링크 복사
+// 11. Share — 링크 공유 + 카카오 공유
 // imageUrl 과 link 는 절대 URL 이어야 합니다 (카카오 공유 썸네일 요건).
-// config.meta.siteUrl 이 설정되어 있으면 그 값, 아니면 현재 페이지 URL 기준으로 계산합니다.
 function ShareSection() {
   const d = window.INVITE_DATA;
   const meta = d.meta;
   const [linkCopied, setLinkCopied] = React.useState(false);
-  const showCopyButton = false;
 
   const isPlaceholder = !meta.siteUrl || meta.siteUrl.includes('YOURNAME');
   const currentDir = `${window.location.origin}${window.location.pathname.replace(/[^/]*$/, '')}`;
   const baseUrl = isPlaceholder ? currentDir : meta.siteUrl;
-  const inviteHash = window.location.hash && window.location.hash.startsWith('#invite=')
-    ? window.location.hash
-    : '';
-  const pageUrl = isPlaceholder ? window.location.href : `${meta.siteUrl}${inviteHash}`;
+  const pageUrl = window.INVITE_CANONICAL_URL;
   const imageUrl = new URL(`assets/${meta.ogImage}`, baseUrl).href;
 
   const copyLink = async () => {
-    try { await navigator.clipboard.writeText(pageUrl); } catch {}
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+    } catch {
+      return false;
+    }
     setLinkCopied(true);
     setTimeout(() => setLinkCopied(false), 1400);
+    return true;
   };
 
-  const shareKakao = () => {
+  const handleCopyLink = async () => {
+    const copied = await copyLink();
+    if (!copied) alert('링크 복사에 실패했습니다. 주소창의 링크를 복사해 주세요.');
+  };
+
+  const shareButtonStyle = {
+    width: '100%', padding: '14px', borderRadius: 0,
+    fontFamily: '"Noto Sans KR", sans-serif',
+    fontSize: fs(12), letterSpacing: 1, cursor: 'pointer',
+    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+  };
+
+  const shareKakao = async () => {
     if (window.Kakao && window.Kakao.Share && window.Kakao.isInitialized && window.Kakao.isInitialized()) {
       window.Kakao.Share.sendDefault({
         objectType: 'feed',
@@ -564,39 +576,33 @@ function ShareSection() {
         }],
       });
     } else {
-      copyLink();
-      alert('카카오톡 공유가 설정되어 있지 않습니다. 링크가 복사되었습니다.');
+      const copied = await copyLink();
+      alert(copied
+        ? '카카오톡 공유가 설정되어 있지 않습니다. 링크가 복사되었습니다.'
+        : '카카오톡 공유가 설정되어 있지 않습니다. 주소창의 링크를 복사해 주세요.');
     }
   };
 
   return (
-    <section style={{ padding: '50px 28px 40px', background: THEME.bgAccent }}>
+    <section style={{ padding: '0 28px 40px', background: THEME.bgAccent }}>
       <FadeIn>
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <button onClick={handleCopyLink} style={{
+            ...shareButtonStyle,
+            background: '#FFFFFF', border: `1px solid ${THEME.line}`, color: '#000000',
+          }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M5.5 8.5L8.5 5.5M4 9.5l-1 1a2.1 2.1 0 01-3-3l2.5-2.5a2.1 2.1 0 013 0M10 4.5l1-1a2.1 2.1 0 013 3l-2.5 2.5a2.1 2.1 0 01-3 0"/></svg>
+            {linkCopied ? '링크 복사 완료' : '링크 공유하기'}
+          </button>
           <button onClick={shareKakao} style={{
-            flex: 1, padding: '14px', background: '#FEE500',
-            border: 'none', borderRadius: 0,
-            fontFamily: '"Noto Sans KR", sans-serif',
-            fontSize: fs(12), color: '#3A2D00', letterSpacing: 1, cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            ...shareButtonStyle,
+            background: '#FEE500', border: 'none', color: '#3A2D00',
           }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 2C4.13 2 1 4.47 1 7.5c0 1.94 1.29 3.64 3.23 4.6L3.5 14.5l2.6-1.73c.62.12 1.25.18 1.9.18 3.87 0 7-2.47 7-5.5S11.87 2 8 2z"/>
             </svg>
             카카오톡 공유하기
           </button>
-          {showCopyButton && (
-            <button onClick={copyLink} style={{
-              padding: '14px 16px', background: THEME.card,
-              border: `1px solid ${THEME.line}`, borderRadius: 0,
-              fontFamily: '"Noto Sans KR", sans-serif',
-              fontSize: fs(12), color: THEME.textSoft, letterSpacing: 1, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: 6,
-            }}>
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3"><path d="M5.5 8.5L8.5 5.5M4 9.5l-1 1a2.1 2.1 0 01-3-3l2.5-2.5a2.1 2.1 0 013 0M10 4.5l1-1a2.1 2.1 0 013 3l-2.5 2.5a2.1 2.1 0 01-3 0"/></svg>
-              {linkCopied ? '복사됨' : '링크복사'}
-            </button>
-          )}
         </div>
       </FadeIn>
     </section>
