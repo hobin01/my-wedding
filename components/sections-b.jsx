@@ -473,8 +473,8 @@ function AccountsSection() {
       display: 'flex', alignItems: 'center', gap: 12,
     }}>
       <div style={{ flex: 1 }}>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.textMuted, letterSpacing: 0.5, marginBottom: 2 }}>{a.bank} · {a.name}</div>
-        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(14), color: THEME.text, letterSpacing: 1 }}>{a.number}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(11), color: THEME.text, letterSpacing: 0.5, marginBottom: 2 }}>{a.bank} · {a.name}</div>
+        <div style={{ fontFamily: '"Noto Sans KR", sans-serif', fontSize: fs(14), color: THEME.text, letterSpacing: 1, fontWeight: 700 }}>{a.number}</div>
       </div>
       <button onClick={() => copy(a.number, `${side}-${a.name}`)}
         style={{
