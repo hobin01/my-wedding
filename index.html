@@ -75,7 +75,6 @@ window.INVITE_CANONICAL_URL = 'https://hobin01.github.io/my-wedding/#invite=mRdd
 if (
   window.location.hostname === 'hobin01.github.io'
   && (window.location.pathname === '/my-wedding' || window.location.pathname === '/my-wedding/')
-  && !window.location.hash
   && window.location.href !== window.INVITE_CANONICAL_URL
 ) {
   window.location.replace(window.INVITE_CANONICAL_URL);
